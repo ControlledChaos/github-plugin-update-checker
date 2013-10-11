@@ -3,7 +3,7 @@
  * Plugin Name:   GitHub Plugin Update Check
  * Plugin URI:    https://github.com/brasofilo/github-plugin-update-checker
  * Description:   Update plugins from GitHub hosted repositories
- * Author:        Rodolfo Buaiz
+ * Author:        Rodolfo Buaizz
  * Version:       0.1
  * Licence:       GPLv3
  * Author URI:    http://brasofilo.com
@@ -111,11 +111,11 @@ class B5F_GitHub_Plugin_Update_Check
 	 */
 	public function rename_github_zip( $source, $remote_source, $thiz )
 	{
-		if(  strpos( $source, 'WordPress-Admin-Style') === false )
+		if(  strpos( $source, self::$repo_slug ) === false )
 			return $source;
 
 		$path_parts = pathinfo($source);
-		$newsource = trailingslashit($path_parts['dirname']). trailingslashit('WordPress-Admin-Style');
+		$newsource = trailingslashit($path_parts['dirname']). trailingslashit( self::$repo_slug );
 		rename($source, $newsource);
 		return $newsource;
 	}
