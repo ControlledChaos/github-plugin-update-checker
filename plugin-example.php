@@ -50,6 +50,9 @@ class B5F_GitHub_Plugin_Update_Check
         // Workaround to remove the suffix "-master" from the unzipped directory
         add_filter( 'upgrader_source_selection', array( $this, 'rename_github_zip' ), 1, 3 );
         
+        // Plugin love
+        add_filter( 'plugin_row_meta', array( $this, 'donate_link' ), 10, 4 );
+
         // Self hosted updates
         include_once 'inc/plugin-update-checker.php';
         $updateChecker = new PluginUpdateCheckerB(
@@ -75,6 +78,27 @@ class B5F_GitHub_Plugin_Update_Check
 	}
 	
     
+    /**
+     * Add donate link to plugin description in /wp-admin/plugins.php
+     * 
+     * @param array $plugin_meta
+     * @param string $plugin_file
+     * @param string $plugin_data
+     * @param string $status
+     * @return array
+     */
+    public function donate_link( $plugin_meta, $plugin_file, $plugin_data, $status ) 
+	{
+		if( plugin_basename( __FILE__ ) == $plugin_file )
+			$plugin_meta[] = sprintf(
+                '&hearts; <a href="%s">%s</a>',
+                'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JNJXKWBYM9JP6&lc=US&item_name=Rodolfo%20Buaiz&item_number=Plugin%20donation&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted',
+                __('Donate','wp_admin_style')
+            );
+		return $plugin_meta;
+	}
+
+
     /**
 	 * Removes the prefix "-master" when updating from GitHub zip files
 	 * 
