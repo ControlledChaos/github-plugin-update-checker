@@ -28,7 +28,7 @@ $updateChecker = new PluginUpdateCheckerB(
 
 The JSON file consists of:
 
-```js
+```json
 {
     "name" : "GitHub Plugin Update Check",
     "slug" : "github-plugin-update-checker-master",
