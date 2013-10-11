@@ -39,6 +39,13 @@ $updateChecker = new PluginUpdateCheckerB(
 );
 ```
 
+###Renamer hook
+[Workaround](/plugin-example.php#L102) to remove the suffix "-master" from the unzipped directory after upgrading
+
+```php
+add_filter( 'upgrader_source_selection', array( $this, 'rename_github_zip' ), 1, 3 );
+```
+
 ###Update configuration file
 The JSON file [consists of](/inc/update.json) (check the [**available fields**](http://goo.gl/rQxS5o) ):
 
