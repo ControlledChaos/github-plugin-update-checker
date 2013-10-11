@@ -1,7 +1,9 @@
 GitHub Plugin Update Checker
 ===========================
 
-Custom update checker library for WordPress plugins. 
+*A custom update checker for WordPress plugins. 
+Useful if you can't or don't want to host your plugin in the official WP plugin repository, 
+but would still like it to support automatic plugin updates.*
 
 It's an adaptation from [YahnisElsts / plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker):
  - the Debug mode and files have been removed, thus reducing everything to 2 files (the updater class and the JSON). 
