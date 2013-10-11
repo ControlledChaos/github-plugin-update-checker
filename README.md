@@ -17,14 +17,14 @@ and the meta file says `0.2`. Take special attention for the use of the prefix `
 
 ###Plugin Slug
 
-In [this sample plugin](/plugin-example.php), the Repository slug is defined in
+In this sample plugin, the Repository slug is [defined in](/plugin-example.php#L24):
 
 ```php
 public static $repo_slug = 'github-plugin-update-checker';
 ```
 
 ###Adding the class and instantiating a new updater
-Adjust the user name in the URL. Check the [**documentation**](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/).
+Adjust the [user name](/plugin-example.php#L57) in the URL. Check the [**documentation**](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/).
 
 ```php
 include_once 'inc/plugin-update-checker.php';
