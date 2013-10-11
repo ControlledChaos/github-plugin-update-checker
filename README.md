@@ -1,13 +1,21 @@
 GitHub Plugin Update Checker
 ===========================
 
-This is a custom update checker library for WordPress plugins. 
-It is an adaptation from [YahnisElsts / plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker):
+Custom update checker library for WordPress plugins. 
+
+It's an adaptation from [YahnisElsts / plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker):
  - the Debug mode and files have been removed, thus reducing everything to 2 files (the updater class and the JSON). 
  - the classes renamed so as to not being confused with the originals.
 
-In this example, we are dealing with GitHub updates, as there are some specifics that have to been take care of. 
+When dealing with GitHub updates there are some specifics that have to been take care of.  
+Specially because of the `-master` suffix.  
 For usage in other update platforms, refer to the original.
+
+This demo plugin will always ask for an update. As the plugin header says Version `0.1`, 
+and the meta file says `0.2`. Take special attention for the use of the prefix `-master`.
+
+
+###Plugin Slug
 
 In this sample plugin, the Repository slug is defined in
 
@@ -15,7 +23,8 @@ In this sample plugin, the Repository slug is defined in
 public static $repo_slug = 'github-plugin-update-checker';
 ```
 
-Also, adjust the user name in the URL
+###Adding the class and instantiating a new updater
+Adjust the user name in the URL. Check the [**documentation**](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/).
 
 ```php
 include_once 'inc/plugin-update-checker.php';
@@ -26,7 +35,8 @@ $updateChecker = new PluginUpdateCheckerB(
 );
 ```
 
-The JSON file consists of:
+###Update configuration file
+The JSON file consists of (check the [**available fields **](http://goo.gl/rQxS5o) ):
 
 ```json
 {
@@ -47,6 +57,4 @@ The JSON file consists of:
 }
 ```
 
-This example will always ask for an update. As the plugin header says Version `0.1`, 
-and the meta file says `0.2`. Note that the slug has the prefix `-master`.
 
