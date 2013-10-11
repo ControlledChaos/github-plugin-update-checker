@@ -3,7 +3,7 @@
  * Plugin Name:   GitHub Plugin Update Check
  * Plugin URI:    https://github.com/brasofilo/github-plugin-update-checker
  * Description:   Update plugins from GitHub hosted repositories
- * Author:        Rodolfo Buaizz
+ * Author:        Rodolfo Buaiz
  * Version:       0.1
  * Licence:       GPLv3
  * Author URI:    http://brasofilo.com
