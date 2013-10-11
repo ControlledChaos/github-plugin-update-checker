@@ -12,5 +12,5 @@
         "changelog" : "<p><ul><li><strong>0.1</strong><p>Plugin launched.</p></li></ul>"
     },
     "upgrade_notice" : "Version 0.2 Plugin fake upgrade.",
-    "last_updated" : "2013.10.09"
+    "last_updated" : "2013-10-09"
 }
