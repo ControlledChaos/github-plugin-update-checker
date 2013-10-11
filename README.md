@@ -36,7 +36,7 @@ $updateChecker = new PluginUpdateCheckerB(
 ```
 
 ###Update configuration file
-The JSON file consists of (check the [**available fields**](http://goo.gl/rQxS5o) ):
+The JSON file [consists of](/inc/update.json) (check the [**available fields**](http://goo.gl/rQxS5o) ):
 
 ```json
 {
