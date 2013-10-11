@@ -5,12 +5,13 @@ GitHub Plugin Update Checker
 Useful if you can't or don't want to host your plugin in the official WP plugin repository, 
 but would still like it to support automatic plugin updates.*
 
-It's an adaptation from [YahnisElsts / plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker):
- - the Debug mode and files have been removed, thus reducing everything to 2 files (the updater class and the JSON). 
- - the classes renamed so as to not being confused with the originals.
+Adaptated from [YahnisElsts / plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker), main changes:
+ - Debug mode (and files) have been removed, thus reducing everything to 2 files (the updater class and the JSON). 
+ - Classes renamed so as to not being confused with the originals.
+ - Sample data adapted to work with GitHub hosted plugins.
 
-When dealing with GitHub updates there are some specifics that have to been take care of.  
-Specially because of the `-master` suffix.  
+When dealing with GitHub updates there are some specifics that have to been take care of. 
+Specially because of the `-master` suffix. 
 For usage in other update platforms, refer to the original.
 
 This demo plugin will always ask for an update. As the plugin header says Version `0.1`, 
