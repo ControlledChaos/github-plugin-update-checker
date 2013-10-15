@@ -15,32 +15,29 @@ Specially because of the `-master` suffix.
 For usage in other update platforms, refer to the original.</sup>
 
 ###Demo mode
-This demo plugin will always ask for an update. As the plugin header says Version `0.1`, 
-and the meta file says `0.2`. Take special attention for the use of the prefix `-master`.
+This demo plugin will always ask for an update. As the plugin header says Version `2013.10.15`, 
+and the meta file says `2013.10.16`. Take special attention for the use of the prefix `-master`.
 
-
-###Plugin Slug
-
-In this sample plugin, the Repository slug is [defined in](/plugin-example.php#L24):
-
-```php
-public static $repo_slug = 'github-plugin-update-checker';
-```
 
 ###Adding the class and instantiating a new updater
-Adjust the [user name](/plugin-example.php#L57) in the URL. Check the [**documentation**](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/).
+I've created a helper class to dispatch our self-updating repo, 
+the main plugin file is just a wrapper and instantiates the helper, which in turn instantiates the Updater class. 
+Check the [**documentation**](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/) of the original plugin.
 
 ```php
-include_once 'inc/plugin-update-checker.php';
-$updateChecker = new PluginUpdateCheckerB(
-    'https://raw.github.com/brasofilo/'.self::$repo_slug.'/master/inc/update.json', 
-    __FILE__, 
-    self::$repo_slug.'-master'
-);
+include_once 'inc/plugin-update-dispatch.php';
+new B5F_General_Updater_and_Plugin_Love(array( 
+    'repo' => 'github-plugin-update-checker', 
+    'user' => 'brasofilo',
+    'plugin_file' => plugin_basename( __FILE__ ),
+    'donate_text' => 'Buy me a beer',
+    'donate_icon' => '&hearts; ',
+    'donate_link' => 'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JNJXKWBYM9JP6&lc=US&item_name=Rodolfo%20Buaiz&item_number=Plugin%20donation&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted'
+));	
 ```
 
 ###Renamer hook
-[Workaround](/plugin-example.php#L102) to remove the suffix "-master" from the unzipped directory after upgrading
+[Workaround](/inc/plugin-update-dispatch.php#L37) to remove the suffix "-master" from the unzipped directory after upgrading
 
 ```php
 add_filter( 'upgrader_source_selection', array( $this, 'rename_github_zip' ), 1, 3 );
