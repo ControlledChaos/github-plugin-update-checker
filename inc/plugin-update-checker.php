@@ -63,7 +63,7 @@ class PluginUpdateChecker_1_3_1b {
 		if ( empty($this->optionName) ){
 			$this->optionName = 'external_updates-' . $this->slug;
 		}
-		
+        
 		$this->installHooks();
 	}
 	
@@ -84,7 +84,6 @@ class PluginUpdateChecker_1_3_1b {
 		add_filter('plugin_row_meta', array($this, 'addCheckForUpdatesLink'), 10, 4);
 		add_action('admin_init', array($this, 'handleManualCheck'));
 		add_action('all_admin_notices', array($this, 'displayManualCheckResult'));
-		
 		//Set up the periodic update checks
 		$this->cronHook = 'check_plugin_updates-' . $this->slug;
 		if ( $this->checkPeriod > 0 ){
@@ -198,7 +197,7 @@ class PluginUpdateChecker_1_3_1b {
 		//Try to parse the response
 		$pluginInfo = null;
 		if ( !is_wp_error($result) && isset($result['response']['code']) && ($result['response']['code'] == 200) && !empty($result['body']) ){
-			$pluginInfo = PluginInfo_1_3::fromJson($result['body'], $this->debugMode);
+			$pluginInfo = PluginInfo_1_3B::fromJson($result['body'], $this->debugMode);
 		} else if ( $this->debugMode ) {
 			$message = sprintf("The URL %s does not point to a valid plugin metadata file. ", $url);
 			if ( is_wp_error($result) ) {
@@ -229,7 +228,7 @@ class PluginUpdateChecker_1_3_1b {
 		if ( $pluginInfo == null ){
 			return null;
 		}
-		return PluginUpdate_1_3::fromPluginInfo($pluginInfo);
+		return PluginUpdate_1_3B::fromPluginInfo($pluginInfo);
 	}
 	
 	/**
@@ -337,7 +336,7 @@ class PluginUpdateChecker_1_3_1b {
 		}
 
 		if ( !empty($state) && isset($state->update) && is_object($state->update) ){
-			$state->update = PluginUpdate_1_3::fromObject($state->update);
+			$state->update = PluginUpdate_1_3B::fromObject($state->update);
 		}
 		return $state;
 	}
@@ -596,7 +595,7 @@ class PluginUpdateChecker_1_3_1b {
 
 endif;
 
-if ( !class_exists('PluginInfo_1_3') ):
+if ( !class_exists('PluginInfo_1_3B') ):
 
 /**
  * A container class for holding and transforming various plugin metadata.
@@ -606,7 +605,7 @@ if ( !class_exists('PluginInfo_1_3') ):
  * @version 1.3
  * @access public
  */
-class PluginInfo_1_3 {
+class PluginInfo_1_3B {
 	//Most fields map directly to the contents of the plugin's info.json file.
 	//See the relevant docs for a description of their meaning.  
 	public $name;
@@ -716,7 +715,7 @@ class PluginInfo_1_3 {
 	
 endif;
 
-if ( !class_exists('PluginUpdate_1_3') ):
+if ( !class_exists('PluginUpdate_1_3B') ):
 
 /**
  * A simple container class for holding information about an available update.
@@ -726,7 +725,7 @@ if ( !class_exists('PluginUpdate_1_3') ):
  * @version 1.2
  * @access public
  */
-class PluginUpdate_1_3 {
+class PluginUpdate_1_3B {
 	public $id = 0;
 	public $slug;
 	public $version;
@@ -746,7 +745,7 @@ class PluginUpdate_1_3 {
 		//Since update-related information is simply a subset of the full plugin info,
 		//we can parse the update JSON as if it was a plugin info string, then copy over
 		//the parts that we care about.
-		$pluginInfo = PluginInfo_1_3::fromJson($json, $triggerErrors);
+		$pluginInfo = PluginInfo_1_3B::fromJson($json, $triggerErrors);
 		if ( $pluginInfo != null ) {
 			return self::fromPluginInfo($pluginInfo);
 		} else {
@@ -910,8 +909,8 @@ endif;
 
 //Register classes defined in this file with the factory.
 PucFactory::addVersion('PluginUpdateCheckerB', 'PluginUpdateChecker_1_3_1b', '1.3.1');
-PucFactory::addVersion('PluginUpdate', 'PluginUpdate_1_3', '1.3');
-PucFactory::addVersion('PluginInfo', 'PluginInfo_1_3', '1.3');
+PucFactory::addVersion('PluginUpdateB', 'PluginUpdate_1_3B', '1.3');
+PucFactory::addVersion('PluginInfoB', 'PluginInfo_1_3B', '1.3');
 
 /**
  * Create non-versioned variants of the update checker classes. This allows for backwards
@@ -922,9 +921,9 @@ if ( !class_exists('PluginUpdateCheckerB') ) {
 }
 
 if ( !class_exists('PluginUpdate') ) {
-	class PluginUpdate extends PluginUpdate_1_3 {}
+	class PluginUpdateB extends PluginUpdate_1_3B {}
 }
 
 if ( !class_exists('PluginInfo') ) {
-	class PluginInfo extends PluginInfo_1_3 {}
+	class PluginInfoB extends PluginInfo_1_3B {}
 }
